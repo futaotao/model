@@ -11,9 +11,18 @@ namespace model
     {
         static void Main(string[] args)
         {
-            String path = "C:\\Users\\Administrator\\Desktop\\xm\\22";
+            String path = "C:\\Users\\Administrator\\Desktop\\xm\\22.txt";
+
+            //String test = path.Substring(0, path.LastIndexOf('\\'));
+
+            //Console.WriteLine(Directory.Exists(path) + "");
+            //Console.Read();
+
+
+            //解析并保存
             String result = readFile(path);
 
+            //保存错误行
             String savePath = "C:\\Users\\Administrator\\Desktop\\xm\\r.txt";
             saveFile(savePath, result);
 
@@ -72,8 +81,13 @@ namespace model
                     content += "sdk_version=" + dic["sdk_version"] + "\n";
                     content += "screen_x_y=" + dic["screen_x_y"];
 
-                    //TODO 保存文件
-
+                    // 10  _10_
+                    // 15  _15_
+                    // 21  _21_
+                    // 22  _22_
+                    String fileName = "22_" + dic["ro.product.brand"] + "_" + dic["sdk_version"] + "_" + i;
+                    String newPath = filePath.Substring(0, filePath.LastIndexOf('\\')) + "\\" + dic["sdk_version"] + "\\" + fileName;
+                    saveFile(newPath, content);
                 }
 
                 //if (info != null && info.Length == 8)
@@ -100,6 +114,11 @@ namespace model
         /// <param name="filePath"></param>
         /// <param name="content"></param>
         private static void saveFile(String filePath, String content) {
+
+            String dir = filePath.Substring(0, filePath.LastIndexOf('\\'));
+            if (!Directory.Exists(dir)) {
+                Directory.CreateDirectory(dir);
+            }
 
             if (!File.Exists(filePath))
             {
@@ -136,10 +155,22 @@ namespace model
         /// <param name="fingerprint"></param>
         /// <returns></returns>
 
+        //按api版本来处理 
+        // 10 15 --> 16
+        // 21 22 -- > 18
         private static Dictionary<String, String> analyze(String str) {
             string[] info = split(str, '|');
 
             int sdk = int.Parse(info[0]);
+            
+            if (sdk == 10 || sdk == 15) {
+                sdk = 16;
+            }
+
+            if (sdk == 21 || sdk == 22) {
+                sdk = 18;
+            }
+
             String model = info[1];
             String brand = info[2];
             String screen = info[3];
@@ -182,7 +213,7 @@ namespace model
             String incremental = split2[0];
            
             String type = split2[1];
-            if (type.Contains("e"))
+            if (type.Contains("n"))
             {
                 type = "eng";
             }
