@@ -11,12 +11,10 @@ namespace model
     {
         static void Main(string[] args)
         {
-            String path = "C:\\Users\\Administrator\\Desktop\\xm\\22.txt";
+            //String path = "C:\\Users\\Administrator\\Desktop\\xm\\22.txt";
 
-            //String test = path.Substring(0, path.LastIndexOf('\\'));
+            String path = "C:\\Users\\Administrator\\Desktop\\xm\\16.txt";
 
-            //Console.WriteLine(Directory.Exists(path) + "");
-            //Console.Read();
 
 
             //解析并保存
@@ -85,7 +83,9 @@ namespace model
                     // 15  _15_
                     // 21  _21_
                     // 22  _22_
-                    String fileName = "22_" + dic["ro.product.brand"] + "_" + dic["sdk_version"] + "_" + i;
+                    //String fileName = "22_" + dic["ro.product.brand"] + "_" + dic["sdk_version"] + "_" + i;
+                    String fileName = dic["ro.product.brand"] + "_" + dic["sdk_version"] + "_" + i;
+
                     String newPath = filePath.Substring(0, filePath.LastIndexOf('\\')) + "\\" + dic["sdk_version"] + "\\" + fileName;
                     saveFile(newPath, content);
                 }
