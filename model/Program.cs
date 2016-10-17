@@ -11,9 +11,9 @@ namespace model
     {
         static void Main(string[] args)
         {
-            //String path = "C:\\Users\\Administrator\\Desktop\\xm\\22.txt";
+            String path = "C:\\Users\\Administrator\\Desktop\\xm\\10.txt";
 
-            String path = "C:\\Users\\Administrator\\Desktop\\xm\\16.txt";
+            //String path = "C:\\Users\\Administrator\\Desktop\\xm\\19.txt";
 
 
 
@@ -63,7 +63,9 @@ namespace model
                     content += "ro.build.id=" + dic["ro.build.id"] + "\n";
                     content += "ro.build.display.id=" + dic["ro.build.display.id"] + "\n";
                     content += "ro.build.version.incremental=" + dic["ro.build.version.incremental"] + "\n";
+                    content += "ro.build.version.sdk=" + dic["ro.build.version.sdk"] + "\n";
                     content += "ro.build.version.codename=" + dic["ro.build.version.codename"] + "\n";
+                    content += "ro.build.version.release=" + dic["ro.build.version.release"] + "\n";
                     content += "ro.build.type=" + dic["ro.build.type"] + "\n";
                     content += "ro.build.user=" + dic["ro.build.user"] + "\n";
                     content += "ro.build.tags=" + dic["ro.build.tags"] + "\n";
@@ -83,8 +85,8 @@ namespace model
                     // 15  _15_
                     // 21  _21_
                     // 22  _22_
-                    //String fileName = "22_" + dic["ro.product.brand"] + "_" + dic["sdk_version"] + "_" + i;
-                    String fileName = dic["ro.product.brand"] + "_" + dic["sdk_version"] + "_" + i;
+                    String fileName = "10_" + dic["ro.product.brand"] + "_" + dic["sdk_version"] + "_" + i;
+                    //String fileName = dic["ro.product.brand"] + "_" + dic["sdk_version"] + "_" + i;
 
                     String newPath = filePath.Substring(0, filePath.LastIndexOf('\\')) + "\\" + dic["sdk_version"] + "\\" + fileName;
                     saveFile(newPath, content);
@@ -243,7 +245,9 @@ namespace model
             dic.Add("ro.build.id",id);
             dic.Add("ro.build.display.id",id);
             dic.Add("ro.build.version.incremental",incremental);
+            dic.Add("ro.build.version.sdk", sdk+"");
             dic.Add("ro.build.version.codename",codename);
+            dic.Add("ro.build.version.release", release);
             dic.Add("ro.build.type",type);
             dic.Add("ro.build.user",user);
             dic.Add("ro.build.tags",tags);
