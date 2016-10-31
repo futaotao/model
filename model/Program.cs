@@ -11,9 +11,9 @@ namespace model
     {
         static void Main(string[] args)
         {
-            String path = "C:\\Users\\Administrator\\Desktop\\xm\\10.txt";
+            //String path = "C:\\Users\\Administrator\\Desktop\\xm\\10.txt";
 
-            //String path = "C:\\Users\\Administrator\\Desktop\\xm\\19.txt";
+            String path = "C:\\Users\\Administrator\\Desktop\\test\\19.txt";
 
 
 
@@ -21,7 +21,7 @@ namespace model
             String result = readFile(path);
 
             //保存错误行
-            String savePath = "C:\\Users\\Administrator\\Desktop\\xm\\r.txt";
+            String savePath = "C:\\Users\\Administrator\\Desktop\\test\\r.txt";
             saveFile(savePath, result);
 
         }
@@ -81,12 +81,12 @@ namespace model
                     content += "sdk_version=" + dic["sdk_version"] + "\n";
                     content += "screen_x_y=" + dic["screen_x_y"];
 
-                    // 10  _10_
-                    // 15  _15_
-                    // 21  _21_
-                    // 22  _22_
-                    String fileName = "10_" + dic["ro.product.brand"] + "_" + dic["sdk_version"] + "_" + i;
-                    //String fileName = dic["ro.product.brand"] + "_" + dic["sdk_version"] + "_" + i;
+                    // 10  10_
+                    // 15  15_
+                    // 21  21_
+                    // 22  22_
+                    //String fileName = "10_" + dic["ro.product.brand"] + "_" + dic["sdk_version"] + "_" + i;
+                    String fileName = dic["ro.product.brand"] + "_" + dic["sdk_version"] + "_" + i;
 
                     String newPath = filePath.Substring(0, filePath.LastIndexOf('\\')) + "\\" + dic["sdk_version"] + "\\" + fileName;
                     saveFile(newPath, content);
@@ -177,6 +177,10 @@ namespace model
             String brand = info[2];
             String screen = info[3];
             screen = generateScreen(screen);
+            //19版本特殊分辨率   按键精灵
+            if (sdk == 19) {
+                screen = "720x1280";
+            }
             String product = info[4];
             String fingerprint = info[5];
             String release = info[6];
